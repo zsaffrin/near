@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/zsaffrin/near/issues"
   },
-  "homepage": "https://github.com/zsaffrin/near#readme"
+  "homepage": "https://github.com/zsaffrin/near#readme",
+  "dependencies": {
+    "commander": "^2.11.0"
+  }
 }
