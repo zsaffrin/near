@@ -28,6 +28,28 @@ var getRadiansFromDegrees = function(degree) {
 	return degree * (Math.PI / 180);
 }
 
+var buildOfficeListWithDistance = function(partners, center) {
+	var officeList = [];
+
+	partners.map(function(partner) {
+		partner.offices.map(function(office) {
+			var location = getLocationFromCoordinates(office.coordinates);
+			var distance = getDistanceFromCoordinatesInKm(center, location);
+
+			var officeEntry = {
+				partner: partner.organization,
+				location: office.location,
+				coordinates: office.coordinates,
+				distance: Math.floor(distance),
+			}
+
+			return officeList.push(officeEntry);
+		});
+	});
+
+	return officeList;
+}
+
 program
 	.arguments('<partnerFile> [distance] [coordinates]')
 	.action(function(partnerFile, distance, coordinates) {
@@ -43,15 +65,13 @@ program
 			}
 			var partners = JSON.parse(data);
 
-			partners.map(function(partner) {
-				console.info(partner.organization);
-
-				partner.offices.map(function(office) {
-					var location = getLocationFromCoordinates(office.coordinates);
-					var distance = getDistanceFromCoordinatesInKm(centerLocation, location);
-					console.info('└─ ' + office.location + ' | Lat:' + location.lat + ' Long:' + location.long + ' | Distance:' + distance + 'km');
-				});
+			var offices = buildOfficeListWithDistance(partners, centerLocation);
+			offices.sort(function(a, b) {
+				return a.distance - b.distance;
 			});
+			offices.map(function(office) {
+				return console.info(office.partner + ' ' + office.location + ' ' + office.distance + 'km');
+			})
 
 			console.info('');
 		});
