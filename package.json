@@ -12,11 +12,19 @@
   },
   "author": "Zach Saffrin <zach.saffrin@gmail.com>",
   "license": "MIT",
+  "bin": {
+    "near": "./index.js"
+  },
   "bugs": {
     "url": "https://github.com/zsaffrin/near/issues"
   },
   "homepage": "https://github.com/zsaffrin/near#readme",
   "dependencies": {
     "commander": "^2.11.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "babel-preset-es2015": "^6.24.1",
+    "eslint": "^4.5.0"
   }
 }
