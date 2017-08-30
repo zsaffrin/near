@@ -1,0 +1,19 @@
+{
+  "name": "near",
+  "version": "0.0.1",
+  "description": "Filter and sort locations by proximity to given lat/long",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zsaffrin/near.git"
+  },
+  "author": "Zach Saffrin <zach.saffrin@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zsaffrin/near/issues"
+  },
+  "homepage": "https://github.com/zsaffrin/near#readme"
+}
