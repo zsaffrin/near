@@ -67,11 +67,14 @@ program
 
 			var offices = buildOfficeListWithDistance(partners, centerLocation);
 			offices.sort(function(a, b) {
-				return a.distance - b.distance;
+				return a.partner - b.partner;
 			});
+			offices = offices.filter(function(office) {
+				return office.distance <= distance;
+			})
 			offices.map(function(office) {
 				return console.info(office.partner + ' ' + office.location + ' ' + office.distance + 'km');
-			})
+			});
 
 			console.info('');
 		});
