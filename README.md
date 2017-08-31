@@ -2,9 +2,14 @@
 
 Near is a handy utility to filter locations by distance
 
+
 ## Install
+
+Clone the repo, cd into the directory, and install it globally with npm
 ```
-npm install -g near
+git clone https://github.com/zsaffrin/near.git
+cd near
+npm i -g
 ```
 
 ## Usage
