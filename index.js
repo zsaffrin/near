@@ -53,8 +53,8 @@ var buildOfficeListWithDistance = function(partners, center) {
 }
 
 program
-	.arguments('<partnerFile> [distance] [coordinates]')
-	.action(function(partnerFile, distance, coordinates) {
+	.arguments('<partnerFile> <distance> <coordinates>')
+	.action(function(partnerFile, coordinates, distance) {
 		console.info('');
 		console.info('Looking for offices within %skm of %s...', distance, coordinates);
 		console.info('');
