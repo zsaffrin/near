@@ -2,6 +2,7 @@
   "rules": {
     "no-tabs": "off",
     "indent": ["error", "tab"],
+    "no-console": ["error", { allow: ["warn", "error", "info"] }],
     "no-trailing-spaces": "off",
   },
 }
