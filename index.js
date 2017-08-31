@@ -4,19 +4,19 @@ var program = require('commander');
 var fs = require('fs');
 
 var getLocationFromCoordinates = function(coordinates) {
-	var splitCoordinates = coordinates.split(',');
+	var split = coordinates.split(',');
 
 	return {
-		lat: splitCoordinates[0],
-		long: splitCoordinates[1],
+		lat: split[0],
+		long: split[1],
 	};
 };
 
 var getDistanceFromCoordinatesInKm = function(pointA, pointB) {
-	var latA = getRadiansFromDegrees(pointA.lat);
-	var latB = getRadiansFromDegrees(pointB.lat);
-	var longA = getRadiansFromDegrees(pointA.long);
-	var longB = getRadiansFromDegrees(pointB.long);
+	var latA = degToRad(pointA.lat);
+	var latB = degToRad(pointB.lat);
+	var longA = degToRad(pointA.long);
+	var longB = degToRad(pointB.long);
 
 	var centerAngle = Math.acos(Math.sin(latA) * Math.sin(latB) + Math.cos(latA) * Math.cos(latB) * Math.cos(longB - longA));
 	var radiusOfEarth = 6371;
@@ -24,7 +24,7 @@ var getDistanceFromCoordinatesInKm = function(pointA, pointB) {
 	return centerAngle * radiusOfEarth;
 };
 
-var getRadiansFromDegrees = function(degree) {
+var degToRad = function(degree) {
 	return degree * (Math.PI / 180);
 }
 
@@ -47,7 +47,9 @@ var buildOfficeListWithDistance = function(partners, center) {
 		});
 	});
 
-	return officeList;
+	return officeList.sort(function(a, b) {
+		return a.partner.localeCompare(b.partner);
+	});
 }
 
 program
@@ -66,12 +68,9 @@ program
 			var partners = JSON.parse(data);
 
 			var offices = buildOfficeListWithDistance(partners, centerLocation);
-			offices.sort(function(a, b) {
-				return a.partner - b.partner;
-			});
 			offices = offices.filter(function(office) {
 				return office.distance <= distance;
-			})
+			});
 			offices.map(function(office) {
 				return console.info(office.partner + ' ' + office.location + ' ' + office.distance + 'km');
 			});
